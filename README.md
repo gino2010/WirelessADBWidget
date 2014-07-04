@@ -12,3 +12,7 @@ Widget needs root permission
 Version 1.0:
 -----------------
 first version already has basic function.
+
+Thanks
+-----------------
+Some code reference: https://github.com/zeXtreme/wirelessadb
