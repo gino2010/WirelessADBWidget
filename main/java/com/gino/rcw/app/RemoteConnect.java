@@ -57,17 +57,18 @@ public class RemoteConnect extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
         if (intent.getAction() != null && intent.getAction().equals(REMOTE_CONNECT_ACTION)) {
-            if (isConnectWIFI(context)) {
-                if (check()) {
-                    close();
-                    Toast.makeText(context, R.string.closed, Toast.LENGTH_LONG).show();
-                } else {
-                    open();
-                    String ipInfo = getWIFIIP(context);
-                    Toast.makeText(context, context.getString(R.string.opened) + ipInfo, Toast.LENGTH_LONG).show();
-                }
-            } else {
+            //close
+            if (check()) {
+                close();
+                Toast.makeText(context, R.string.closed, Toast.LENGTH_LONG).show();
+            //not connect wifi to open port
+            } else if (!isConnectWIFI(context) && !check()) {
                 Toast.makeText(context, R.string.no_wifi, Toast.LENGTH_LONG).show();
+            //connected wifi and open port
+            } else if (isConnectWIFI(context) && !check()) {
+                open();
+                String ipInfo = getWIFIIP(context);
+                Toast.makeText(context, context.getString(R.string.opened) + ipInfo, Toast.LENGTH_LONG).show();
             }
 
             //app widget update
